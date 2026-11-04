@@ -34,7 +34,7 @@ open(out, 'w').write(f'''<!doctype html>
 </head>
 <body>
 <div style="position:absolute;width:0;height:0;overflow:hidden"><img src="img/icon-512.jpg" alt=""></div>
-<div class="hero"><div class="en">工业革命 · 伯明翰</div><h1>新手教程</h1><div class="orn"></div></div><div class="band"></div>
+<div class="hero hero-nav"><a class="nav-back" href="/" data-html2canvas-ignore>‹ 返回</a><div class="en">工业革命 · 伯明翰</div><h1>新手教程</h1><div class="orn"></div></div><div class="band"></div>
 <div class="wrap guide">
 <h2 class="h">图文讲解<small>{len(secs)} 节</small></h2>
 <nav class="toc">{toc}</nav>
