@@ -142,5 +142,5 @@ node tools/screenshots.mjs  http://localhost:8811/ docs/screenshots       # 重�
 
 - 本项目是非官方的玩家工具，不提供游戏本体，也不能在线玩。线下对局仍需实体《工业革命：伯明翰》。
 - 规则依据 Roxley 官方规则书 v2018.11（[PDF](https://cdn.shopify.com/s/files/1/0246/2190/8043/files/Brass-Birmingham-Rulebook.pdf)），常见问题由规则书整理，并非官方 FAQ。
-- 游戏名称、规则的权利归原出版方所有。封面、人物肖像和图标为本项目用 Codex CLI 的生图功能原创生成，教程图由 `tools/render_slides.mjs` 绘制，均未使用出版社的美术。
+- 游戏名称、规则及首页封面图（游戏盒封面，由 Codex CLI 做了高清化）的权利归原出版方 Roxley 所有。其余插画（教程封面、人物肖像、图标）为本项目用 Codex CLI 的生图功能原创生成，教程图由 `tools/render_slides.mjs` 绘制。
 - 代码以 [MIT](LICENSE) 许可开源。

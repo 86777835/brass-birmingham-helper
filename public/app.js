@@ -156,8 +156,8 @@ function landing() {
       <button class="card lobby" data-act="rejoin" data-code="${c}" data-k="lb-${c}">
         <span class="lc">${c}${tag(c)}</span><span class="lp"></span><span class="ls"><small>点击进入</small></span>
       </button>`).join('') : '<div class="empty">暂无进行中的房间</div>';
-  return `<div class="hero-art" data-k="hero"><img src="img/hero.jpg" alt=""><div class="ht">
-      <div class="wm">BRASS</div><div class="hr"></div><div class="hz">伯明翰开局小助手</div><div class="hs">快速开局 · 计分不烧心</div></div></div>
+  return `<div class="hero-art" data-k="hero"><img src="img/cover.jpg" alt="《工业革命：伯明翰》封面"><div class="ht">
+      <div class="hz">伯明翰开局小助手</div><div class="hs">快速开局 · 计分不烧心</div></div></div>
     <div class="wrap" data-k="landing">
     <div class="card start">
       <button class="btn" data-act="create" ${ui.busy ? 'disabled' : ''}>创建新房间</button>
