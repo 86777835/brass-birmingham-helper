@@ -8,6 +8,8 @@
 
 一桌人用手机扫码进同一个房间，所有操作实时同步，无需下载、无需注册。
 
+**[立即使用 → bham.leisurecat.cloud](https://bham.leisurecat.cloud)**
+
 姊妹站：[匹兹堡开局小助手](https://pgh.leisurecat.cloud)
 
 <img src="docs/screenshots/landing.jpg" width="260" alt="首页">
@@ -100,9 +102,9 @@
 wrangler dev --port 8811     # 本地运行，打开 http://localhost:8811
 ```
 
-部署前：
-- **KV**：运行 `wrangler kv namespace create CHAT_STATE`，把得到的 id 填进 `wrangler.jsonc`（现在的全 0 只能本地用）。
-- **域名**：在 `wrangler.jsonc` 里加上自定义域名，例如 `"routes": [{ "pattern": "你的域名", "custom_domain": true }]`；`index.html` 和 `tools/build_guide.py` 里分享图的地址也改成你的域名。
+自己部署时：
+- **KV**：运行 `wrangler kv namespace create CHAT_STATE`，把得到的 id 换进 `wrangler.jsonc`。
+- **域名**：去掉或改掉 `wrangler.jsonc` 里的自定义域名 `bham.leisurecat.cloud`；`index.html` 和 `tools/build_guide.py` 里分享图的地址也改成你的域名。
 - **规则助手**：运行 `wrangler secret put DEEPSEEK_API_KEY --name <Worker 名>` 填入你的 DeepSeek API 密钥；不配置时助手会提示「还没有配置好」。
 
 ```bash
@@ -140,5 +142,5 @@ node tools/screenshots.mjs  http://localhost:8811/ docs/screenshots       # 重�
 
 - 本项目是非官方的玩家工具，不提供游戏本体，也不能在线玩。线下对局仍需实体《工业革命：伯明翰》。
 - 规则依据 Roxley 官方规则书 v2018.11（[PDF](https://cdn.shopify.com/s/files/1/0246/2190/8043/files/Brass-Birmingham-Rulebook.pdf)），常见问题由规则书整理，并非官方 FAQ。
-- 游戏名称、规则的权利归原出版方所有。封面、人物肖像和教程图均为本项目原创绘制，未使用出版社的美术。
+- 游戏名称、规则的权利归原出版方所有。封面、人物肖像和图标为本项目用 Codex CLI 的生图功能原创生成，教程图由 `tools/render_slides.mjs` 绘制，均未使用出版社的美术。
 - 代码以 [MIT](LICENSE) 许可开源。
