@@ -12,8 +12,8 @@ try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   await page.route('https://boardgame.leisurecat.cloud/**', r => r.fulfill({ json: { ok: true }, headers: { 'access-control-allow-origin': '*' } }));
   const check = async label => {
-    await page.locator('.nav-back').waitFor({ state: 'visible' });
-    const issues = await page.locator('.nav-back').evaluate(el => {
+    await page.locator('.nav-back:not(.rate-nav)').waitFor({ state: 'visible' });
+    const issues = await page.locator('.nav-back:not(.rate-nav)').evaluate(el => {
       const r = el.getBoundingClientRect(), issues = [];
       if (r.height < 36 || r.left < 0 || r.top < 0 || r.right > innerWidth || r.bottom > innerHeight) issues.push('size or visibility');
       if (document.documentElement.scrollWidth > innerWidth) issues.push('horizontal overflow');
@@ -29,8 +29,8 @@ try {
     console.log('PASS', label);
   };
   await page.goto(base);
-  assert.equal(await page.locator('.nav-back').textContent(), '‹ 全部游戏');
-  assert.equal(await page.locator('.nav-back').getAttribute('href'), 'https://boardgame.leisurecat.cloud');
+  assert.equal(await page.locator('.nav-back:not(.rate-nav)').textContent(), '‹ 全部游戏');
+  assert.equal(await page.locator('.nav-back:not(.rate-nav)').getAttribute('href'), 'https://boardgame.leisurecat.cloud');
   await check('landing navigation');
   await page.screenshot({ path: `${out}/nav_bham_landing.png` });
   await page.click('[data-act="create"]');
@@ -40,8 +40,8 @@ try {
   await page.waitForTimeout(500);
   await check('setup navigation');
   const leaveAndRejoin = async () => {
-    assert.equal(await page.locator('.nav-back').textContent(), '‹ 首页');
-    await page.click('.nav-back');
+    assert.equal(await page.locator('.nav-back:not(.rate-nav)').textContent(), '‹ 首页');
+    await page.click('.nav-back:not(.rate-nav)');
     await page.waitForSelector('[data-act="create"]');
     assert.equal(new URL(page.url()).search, '');
     await page.click(`[data-act="rejoin"][data-code="${code}"]`);
@@ -65,11 +65,11 @@ try {
   }
   for (const name of (await readdir(new URL('../public/', import.meta.url))).filter(n => n.endsWith('.html') && n !== 'index.html')) {
     await page.goto(new URL(name, base).href);
-    assert.equal(await page.locator('.nav-back').textContent(), '‹ 返回');
-    assert.equal(await page.locator('.nav-back').getAttribute('href'), '/');
+    assert.equal(await page.locator('.nav-back:not(.rate-nav)').textContent(), '‹ 返回');
+    assert.equal(await page.locator('.nav-back:not(.rate-nav)').getAttribute('href'), '/');
     await check(`${name} navigation`);
     if (name === 'guide.html') await page.screenshot({ path: `${out}/nav_bham_guide.png` });
-    await page.click('.nav-back');
+    await page.click('.nav-back:not(.rate-nav)');
     await page.waitForSelector('[data-act="create"]');
   }
   console.log('ALL PASS');
