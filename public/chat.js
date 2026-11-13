@@ -31,6 +31,7 @@ $c('.cx').onclick = () => open(false);
 $c('.csug').onclick = e => { const b = e.target.closest('button'); if (b) ask(b.textContent); };
 form.onsubmit = e => { e.preventDefault(); ask(box.value); };
 box.onkeydown = e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); ask(box.value); } };
+window.askRules = q => { open(true); ask(q); };   // the teach page's 「问」 buttons
 
 // One message row; assistant rows carry the avatar. Returns the bubble.
 function bubble(cls, html) {

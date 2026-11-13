@@ -64,6 +64,17 @@
 <img src="docs/screenshots/history.jpg" width="260" alt="往期对局">
 </p>
 
+### 3 分钟讲规则（2026-11-13）
+
+首页「第一次玩？3 分钟讲规则」进入 `/teach`，照匹兹堡站的讲规则页做，给带新人开局的人用。讲的人先照着念主流程：怎么赢、一轮怎么走、玩家板、六种行动、煤铁和啤酒、时代结束，共 6 段、约 970 字，正常语速三四分钟。每个重要要素（运河与铁路、连线图标、翻面、收入等级、六种产业、时代禁建图标、商人与商人啤酒、煤铁市场等）一句话点到。
+
+- 带下划线的词点一下，从底部弹出官方规则书截图、在桌上哪儿看到、什么意思，还可以一键问规则助手。
+- 每段末尾有「桌上常见疑问」按钮，点了直接问规则助手。
+- 主流程之后是 20 条「注意事项」：建在哪个空格、煤要连通铁不用、啤酒的三个来源、覆盖建造、农场酿酒厂等，答案都写好了，默认收起，依据常见问题和规则书。
+- 页面底部有「图标速查」。
+
+图片截自 Roxley 官方规则书 v2018.11，放在 `public/img/teach/`，共 31 张，约 95 KB；页脚署名并链接原文。
+
 ### 新手教程与常见问题
 
 23 节图文讲解，加上依据官方规则书整理的 36 条常见问题，新手开局前刷一遍就能上桌。
@@ -91,7 +102,7 @@
 
 | 部分 | 说明 |
 |---|---|
-| `public/` | 页面静态资源：`index.html`、`app.js`、`style.css`、`img/`、教程页 `guide.html`（含 `guide/` 教程图）、往期对局 `history.html` |
+| `public/` | 页面静态资源：`index.html`、`app.js`、`style.css`、`img/`、教程页 `guide.html`（含 `guide/` 教程图）、讲规则页 `teach.html` + `teach.js`（讲稿、术语、注意事项都写在 `teach.js` 开头，截图在 `img/teach/`）、往期对局 `history.html` |
 | `public/logic.js` | 规则与状态逻辑（顺位、轮数、计分、成就），页面和服务端共用同一份代码，服务端权威校验 |
 | `src/worker.js` | Cloudflare Worker：建房接口；`Room`（每个房间一个 Durable Object，WebSocket 实时同步）；`Lobby`（首页房间列表）；`Archive`（往期对局存档）；`/api/chat` 规则助手（流式转发，按 IP 限流，密钥只存在服务端） |
 | `public/vendor/` | [html2canvas](https://github.com/niklasvh/html2canvas) 1.4.1（MIT），用于生成结算长图 |
@@ -134,6 +145,8 @@ node tests/test_room2.mjs   http://localhost:8811/ ./shots                # 4 �
 node tests/test_history.mjs http://localhost:8811/ ./shots --many-rooms   # 2 人局 20 轮、往期对局存档与搜索；房间多时首页按钮仍在首屏
 node tests/test_history.mjs https://你的域名/ ./shots --live              # 线上冒烟：打完一局再撤销，不留记录
 node tests/test_review.mjs  http://localhost:8811/                       # 结算页评价卡（评价接口在测试里拦截，不写线上数据）
+node tests/test_teach.mjs   http://localhost:8811/ ./shots                # 讲规则页（/api/chat 在测试里拦截，不调模型；也可以对线上跑）
+node tests/test_nav.mjs     http://localhost:8892/ ./shots                # 各页面的返回按钮（要求本地 8892 端口）
 node tests/test_chat.mjs    http://localhost:8811/ ./shots --no-key       # 规则助手界面（未配置密钥时）
 node tests/test_chat.mjs    http://localhost:8811/ ./shots --fake-key     # 请求校验与限流（wrangler dev 需加 --var DEEPSEEK_API_KEY:fake --var CHAT_CF_MODEL:@cf/none/missing）
 node tests/test_chat.mjs    http://localhost:8811/ ./shots --mock-upstream # 备用模型切换（wrangler dev 需加 --var DEEPSEEK_API_KEY:fake --var DEEPSEEK_BASE:http://127.0.0.1:18851 --var CHAT_CF_MODEL:@cf/none/missing）
@@ -150,5 +163,5 @@ node tools/screenshots.mjs  http://localhost:8811/ docs/screenshots       # 重�
 
 - 本项目是非官方的玩家工具，不提供游戏本体，也不能在线玩。线下对局仍需实体《工业革命：伯明翰》。
 - 规则依据 Roxley 官方规则书 v2018.11（[PDF](https://cdn.shopify.com/s/files/1/0246/2190/8043/files/Brass-Birmingham-Rulebook.pdf)），常见问题由规则书整理，并非官方 FAQ。
-- 游戏名称、规则及首页封面图（游戏盒封面，由 Codex CLI 做了高清化）的权利归原出版方 Roxley 所有。其余插画（教程封面、人物肖像、图标）为本项目用 Codex CLI 的生图功能原创生成，教程图由 `tools/render_slides.mjs` 绘制。
+- 游戏名称、规则及首页封面图（游戏盒封面，由 Codex CLI 做了高清化）的权利归原出版方 Roxley 所有。讲规则页的图片截自 Roxley 官方规则书，版权归 Roxley Games 所有。其余插画（教程封面、人物肖像、图标）为本项目用 Codex CLI 的生图功能原创生成，教程图由 `tools/render_slides.mjs` 绘制。
 - 代码以 [MIT](LICENSE) 许可开源。
