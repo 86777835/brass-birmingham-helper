@@ -142,6 +142,7 @@ node tools/render_slides.mjs
 ```bash
 node tests/test_room.mjs    http://localhost:8811/ ./shots                # 双手机 3 人局完整 18 轮
 node tests/test_room2.mjs   http://localhost:8811/ ./shots                # 4 人局、小屏、撤销、断线、平分、改名、长图等
+node tests/test_score_era.mjs http://localhost:8811/                     # 铁路时代里补运河时代计分：填完一格不会跳到铁路时代（两台手机）
 node tests/test_history.mjs http://localhost:8811/ ./shots --many-rooms   # 2 人局 20 轮、往期对局存档与搜索；房间多时首页按钮仍在首屏
 node tests/test_history.mjs https://你的域名/ ./shots --live              # 线上冒烟：打完一局再撤销，不留记录
 node tests/test_review.mjs  http://localhost:8811/                       # 结算页评价卡（评价接口在测试里拦截，不写线上数据）
